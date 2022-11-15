@@ -141,7 +141,7 @@ public class BenchmarkTestSimple {
 
         @Setup(Level.Trial)
         public void prepare(){
-            copier = BeanCopierCache.INSTANCE.get(DbDO.class, DbVO.class, null);
+            copier = BeanCopierCache.INSTANCE.get(DataBaseDO.class, DataBaseVO.class, null);
         }
     }
 
