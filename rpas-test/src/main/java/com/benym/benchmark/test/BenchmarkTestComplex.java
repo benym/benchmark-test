@@ -1,12 +1,14 @@
 package com.benym.benchmark.test;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.extra.cglib.BeanCopierCache;
 import com.alibaba.fastjson.JSON;
 import com.benym.benchmark.test.interfaces.MapStructMapperComplex;
 import com.benym.benchmark.test.model.complex.DbDO;
 import com.benym.benchmark.test.model.complex.DbVO;
 import com.benym.benchmark.test.model.simple.DataBaseVO;
 import com.benym.benchmark.test.service.ModelService;
+import com.benym.benchmark.test.utils.RpasBeanUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
@@ -38,7 +40,7 @@ import java.util.concurrent.TimeUnit;
 public class BenchmarkTestComplex {
     /**
      * 作用域为本次JMH测试，线程共享
-     *
+     * <p>
      * 初始化source数据集
      */
     @State(Scope.Benchmark)
@@ -78,6 +80,16 @@ public class BenchmarkTestComplex {
         }
     }
 
+    @State(Scope.Benchmark)
+    public static class RpasBeanUtilsInit {
+        BeanCopier copier;
+
+        @Setup(Level.Trial)
+        public void prepare() {
+            copier = RpasBeanUtils.getBeanCopierWithNoConverter(DbDO.class, DbVO.class);
+        }
+    }
+
     /**
      * 初始化BeanCopier
      */
@@ -95,12 +107,12 @@ public class BenchmarkTestComplex {
      * 初始化MapStruct
      */
     @State(Scope.Benchmark)
-    public static class MapStructInit{
+    public static class MapStructInit {
         MapStructMapperComplex mapStructMapper;
 
         @Setup(Level.Trial)
-        public void prepare(){
-            mapStructMapper  = Mappers.getMapper(MapStructMapperComplex.class);
+        public void prepare() {
+            mapStructMapper = Mappers.getMapper(MapStructMapperComplex.class);
         }
     }
 
@@ -112,8 +124,21 @@ public class BenchmarkTestComplex {
         ObjectMapper objectMapper;
 
         @Setup(Level.Trial)
-        public void prepare(){
+        public void prepare() {
             objectMapper = new ObjectMapper();
+        }
+    }
+
+    /**
+     * 初始化hutool cglibUtil
+     */
+    @State(Scope.Benchmark)
+    public static class HutoolCglibInit {
+        BeanCopier copier;
+
+        @Setup(Level.Trial)
+        public void prepare(){
+            copier = BeanCopierCache.INSTANCE.get(DbDO.class, DbVO.class, null);
         }
     }
 
@@ -240,10 +265,25 @@ public class BenchmarkTestComplex {
     }
 
     /**
+     * RpasBeanUtils基准测试
+     *
+     * @param generateModel source
+     * @param init 初始化copier
+     * @return target
+     * @throws Exception
+     */
+    @Benchmark
+    public DbVO testRpasBeanUtils(GenerateModel generateModel, RpasBeanUtilsInit init) throws Exception {
+        DbVO dbVO = new DbVO();
+        init.copier.copy(generateModel.dbDo, dbVO, null);
+        return dbVO;
+    }
+
+    /**
      * MapStruct基准测试
      *
      * @param generateModel source
-     * @param init 初始化的mapper
+     * @param init          初始化的mapper
      * @return target
      * @throws Exception
      */
@@ -257,7 +297,7 @@ public class BenchmarkTestComplex {
      * BeanCopier基准测试
      *
      * @param generateModel source
-     * @param beanCopier 初始化的BeanCopier
+     * @param beanCopier    初始化的BeanCopier
      * @return target
      * @throws Exception
      */
@@ -273,17 +313,17 @@ public class BenchmarkTestComplex {
      * Jackson objectMapper基准测试
      *
      * @param generateModel source
-     * @param init 初始化的ObjectMapper
+     * @param init          初始化的ObjectMapper
      * @return target
      * @throws Exception
      */
     @Benchmark
-    public DbVO testJackSon(GenerateModel generateModel, ObjectMapperInit init) throws Exception{
+    public DbVO testJackSon(GenerateModel generateModel, ObjectMapperInit init) throws Exception {
         String str = init.objectMapper.writeValueAsString(generateModel.dbDo);
         DbVO dbVO = init.objectMapper.readValue(str, DbVO.class);
         return dbVO;
     }
-    
+
 
     /**
      * FastJson基准测试
@@ -308,8 +348,22 @@ public class BenchmarkTestComplex {
     @Benchmark
     public DbVO testHutoolBeanUtil(GenerateModel generateModel) throws Exception {
         DbVO DbVO = new DbVO();
-        BeanUtil.copyProperties(generateModel.dbDo,DbVO);
+        BeanUtil.copyProperties(generateModel.dbDo, DbVO);
         return DbVO;
+    }
+
+    /**
+     * Hutool CglibUtil基准测试
+     *
+     * @param generateModel source
+     * @return target
+     * @throws Exception
+     */
+    @Benchmark
+    public DbVO testHutoolCglibUtil(GenerateModel generateModel, HutoolCglibInit init) throws Exception {
+        DbVO dbVO = new DbVO();
+        init.copier.copy(generateModel.dbDo, dbVO, null);
+        return dbVO;
     }
 
     /**
@@ -344,7 +398,7 @@ public class BenchmarkTestComplex {
      * Orika基准测试
      *
      * @param generateModel source
-     * @param orikaMapper 初始化orika
+     * @param orikaMapper   初始化orika
      * @return target
      * @throws Exception
      */
@@ -360,7 +414,7 @@ public class BenchmarkTestComplex {
      * Dozer基准测试
      *
      * @param generateModel source
-     * @param dozerMapper 初始化dozer
+     * @param dozerMapper   初始化dozer
      * @return target
      * @throws Exception
      */
