@@ -136,11 +136,6 @@
             <artifactId>dozer</artifactId>
             <version>5.5.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
-            <scope>provided</scope>
-        </dependency>
 
     </dependencies>
 
