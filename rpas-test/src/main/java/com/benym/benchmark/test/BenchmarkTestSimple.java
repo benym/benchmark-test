@@ -327,7 +327,7 @@ public class BenchmarkTestSimple {
     public static void main(String[] args) throws RunnerException {
         Options options = new OptionsBuilder()
                 .include(BenchmarkTestSimple.class.getSimpleName())
-                .result("result.json")
+                .result("result-simple.json")
                 .resultFormat(ResultFormatType.JSON)
                 .build();
         new Runner(options).run();

@@ -404,7 +404,6 @@ public class BenchmarkTestComplex {
      */
     @Benchmark
     public DbVO testOrikaMapper(GenerateModel generateModel, OrikaMapper orikaMapper) throws Exception {
-        // MapperFacade对象始终是同一个,不需要重复创建,减少创建开销,公平测试
         MapperFacade mapperFacade = orikaMapper.mapperFactory.getMapperFacade();
         DbVO DbVO = mapperFacade.map(generateModel.dbDo, DbVO.class);
         return DbVO;
@@ -427,7 +426,7 @@ public class BenchmarkTestComplex {
     public static void main(String[] args) throws RunnerException {
         Options options = new OptionsBuilder()
                 .include(BenchmarkTestComplex.class.getSimpleName())
-                .result("result2.json")
+                .result("result-complex.json")
                 .resultFormat(ResultFormatType.JSON)
                 .build();
         new Runner(options).run();
