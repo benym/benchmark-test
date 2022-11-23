@@ -62,8 +62,8 @@ public class RpasBeanUtils {
      */
     private static <S,T> BeanCopier getBeanCopierWithConverter(Class<S> sourceClass, Class<T> targetClass, Converter converter) {
         StringBuffer beanKey = new StringBuffer();
-        beanKey.append(sourceClass.getName());
-        beanKey.append(targetClass.getName());
+        beanKey.append(sourceClass);
+        beanKey.append(targetClass);
         beanKey.append(converter.toString());
         BeanCopier beanCopier;
         String beanKeyStr = beanKey.toString();
