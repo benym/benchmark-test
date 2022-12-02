@@ -6,7 +6,6 @@ import com.alibaba.fastjson.JSON;
 import com.benym.benchmark.test.interfaces.MapStructMapperComplex;
 import com.benym.benchmark.test.model.complex.DbDO;
 import com.benym.benchmark.test.model.complex.DbVO;
-import com.benym.benchmark.test.model.simple.DataBaseVO;
 import com.benym.benchmark.test.service.ModelService;
 import com.benym.benchmark.test.utils.RpasBeanUtils;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -426,7 +425,7 @@ public class BenchmarkTestComplex {
     public static void main(String[] args) throws RunnerException {
         Options options = new OptionsBuilder()
                 .include(BenchmarkTestComplex.class.getSimpleName())
-                .result("result-complex.json")
+                .result("com/benym/benchmark/test/BeanBenchMark/result-complex.json")
                 .resultFormat(ResultFormatType.JSON)
                 .build();
         new Runner(options).run();
