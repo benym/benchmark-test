@@ -1,0 +1,178 @@
+[
+    {
+        "jmhVersion" : "1.29",
+        "benchmark" : "com.benym.benchmark.test.MhExceptionBenchMark.MhExceptioTest.directNew",
+        "mode" : "avgt",
+        "threads" : 10,
+        "forks" : 1,
+        "jvm" : "D:\\Java 1.8\\JDK\\jre\\bin\\java.exe",
+        "jvmArgs" : [
+            "-javaagent:D:\\IntelliJ IDEA 2022.2.2\\lib\\idea_rt.jar=61040:D:\\IntelliJ IDEA 2022.2.2\\bin",
+            "-Dfile.encoding=UTF-8"
+        ],
+        "jdkVersion" : "1.8.0_341",
+        "vmName" : "Java HotSpot(TM) 64-Bit Server VM",
+        "vmVersion" : "25.341-b10",
+        "warmupIterations" : 3,
+        "warmupTime" : "10 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 10,
+        "measurementTime" : "5 s",
+        "measurementBatchSize" : 1,
+        "primaryMetric" : {
+            "score" : 154.34076003625563,
+            "scoreError" : 16.426404845423935,
+            "scoreConfidence" : [
+                137.91435519083169,
+                170.76716488167958
+            ],
+            "scorePercentiles" : {
+                "0.0" : 142.9500166417841,
+                "50.0" : 157.21135779238674,
+                "90.0" : 175.8298005480384,
+                "95.0" : 177.53240418773538,
+                "99.0" : 177.53240418773538,
+                "99.9" : 177.53240418773538,
+                "99.99" : 177.53240418773538,
+                "99.999" : 177.53240418773538,
+                "99.9999" : 177.53240418773538,
+                "100.0" : 177.53240418773538
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    158.00040882798876,
+                    157.42057231766302,
+                    157.00214326711045,
+                    157.7226004267472,
+                    177.53240418773538,
+                    160.50636779076567,
+                    144.27540304880827,
+                    142.9500166417841,
+                    143.67665278483037,
+                    144.32103106912317
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.29",
+        "benchmark" : "com.benym.benchmark.test.MhExceptionBenchMark.MhExceptioTest.mhLamda",
+        "mode" : "avgt",
+        "threads" : 10,
+        "forks" : 1,
+        "jvm" : "D:\\Java 1.8\\JDK\\jre\\bin\\java.exe",
+        "jvmArgs" : [
+            "-javaagent:D:\\IntelliJ IDEA 2022.2.2\\lib\\idea_rt.jar=61040:D:\\IntelliJ IDEA 2022.2.2\\bin",
+            "-Dfile.encoding=UTF-8"
+        ],
+        "jdkVersion" : "1.8.0_341",
+        "vmName" : "Java HotSpot(TM) 64-Bit Server VM",
+        "vmVersion" : "25.341-b10",
+        "warmupIterations" : 3,
+        "warmupTime" : "10 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 10,
+        "measurementTime" : "5 s",
+        "measurementBatchSize" : 1,
+        "primaryMetric" : {
+            "score" : 274.85352225108466,
+            "scoreError" : 13.551998018534183,
+            "scoreConfidence" : [
+                261.3015242325505,
+                288.4055202696188
+            ],
+            "scorePercentiles" : {
+                "0.0" : 268.01017998702883,
+                "50.0" : 272.6125705427702,
+                "90.0" : 296.9562148781226,
+                "95.0" : 299.06243939135237,
+                "99.0" : 299.06243939135237,
+                "99.9" : 299.06243939135237,
+                "99.99" : 299.06243939135237,
+                "99.999" : 299.06243939135237,
+                "99.9999" : 299.06243939135237,
+                "100.0" : 299.06243939135237
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    299.06243939135237,
+                    278.0001942590545,
+                    268.01017998702883,
+                    269.7178187466958,
+                    271.4528431539085,
+                    269.4005356803903,
+                    274.20724422397467,
+                    272.2503827429726,
+                    272.9747583425677,
+                    273.45882598290143
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    },
+    {
+        "jmhVersion" : "1.29",
+        "benchmark" : "com.benym.benchmark.test.MhExceptionBenchMark.MhExceptioTest.mhNoLamda",
+        "mode" : "avgt",
+        "threads" : 10,
+        "forks" : 1,
+        "jvm" : "D:\\Java 1.8\\JDK\\jre\\bin\\java.exe",
+        "jvmArgs" : [
+            "-javaagent:D:\\IntelliJ IDEA 2022.2.2\\lib\\idea_rt.jar=61040:D:\\IntelliJ IDEA 2022.2.2\\bin",
+            "-Dfile.encoding=UTF-8"
+        ],
+        "jdkVersion" : "1.8.0_341",
+        "vmName" : "Java HotSpot(TM) 64-Bit Server VM",
+        "vmVersion" : "25.341-b10",
+        "warmupIterations" : 3,
+        "warmupTime" : "10 s",
+        "warmupBatchSize" : 1,
+        "measurementIterations" : 10,
+        "measurementTime" : "5 s",
+        "measurementBatchSize" : 1,
+        "primaryMetric" : {
+            "score" : 3157.4785118532577,
+            "scoreError" : 173.27329612303515,
+            "scoreConfidence" : [
+                2984.2052157302223,
+                3330.751807976293
+            ],
+            "scorePercentiles" : {
+                "0.0" : 3021.87111557173,
+                "50.0" : 3098.920898343068,
+                "90.0" : 3335.771214049602,
+                "95.0" : 3335.8020279180373,
+                "99.0" : 3335.8020279180373,
+                "99.9" : 3335.8020279180373,
+                "99.99" : 3335.8020279180373,
+                "99.999" : 3335.8020279180373,
+                "99.9999" : 3335.8020279180373,
+                "100.0" : 3335.8020279180373
+            },
+            "scoreUnit" : "ns/op",
+            "rawData" : [
+                [
+                    3335.8020279180373,
+                    3335.493889233684,
+                    3092.262797060926,
+                    3215.014745458234,
+                    3237.265110945451,
+                    3076.0345184569787,
+                    3021.87111557173,
+                    3091.2328207490436,
+                    3105.5789996252097,
+                    3064.2290935132805
+                ]
+            ]
+        },
+        "secondaryMetrics" : {
+        }
+    }
+]
+
+
