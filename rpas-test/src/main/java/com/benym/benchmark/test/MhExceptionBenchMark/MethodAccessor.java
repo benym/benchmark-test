@@ -11,9 +11,11 @@ import java.util.function.Function;
  * 对于非私有变量访问的场景，MethodHandle可以和LambdaMetafactory.metafactory任意lambda函数结合，做到更通用化，此处为和Function结合
  * 采用纳秒为单位，数值越小越快，从上至下，直接new set、lambda mh、无lambda的mh
  * Benchmark                                      Mode  Cnt     Score     Error  Units
- * MhExceptionBenchMark.MhExceptioTest.directNew  avgt   10   154.341 ±  16.426  ns/op
- * MhExceptionBenchMark.MhExceptioTest.mhLamda    avgt   10   274.854 ±  13.552  ns/op
- * MhExceptionBenchMark.MhExceptioTest.mhNoLamda  avgt   10  3157.479 ± 173.273  ns/op
+ * MhExceptionBenchMark.MhExceptioTest.directNew  avgt   10  2821.192 ± 165.195  ns/op
+ * MhExceptionBenchMark.MhExceptioTest.mhLamda    avgt   10  2589.443 ± 204.428  ns/op
+ * MhExceptionBenchMark.MhExceptioTest.mhNoLamda  avgt   10  2664.148 ± 217.869  ns/op
+ * MhExceptionBenchMark.MhExceptioTest.reflet     avgt   10  2710.181 ± 304.747  ns/op
+ *
  * @date: 2022/12/1 14:30
  */
 public final class MethodAccessor {
@@ -24,7 +26,7 @@ public final class MethodAccessor {
 
     private static final MethodType methodType = MethodType.methodType(void.class, String.class);
 
-    private static final ConcurrentHashMap<String, AbstractException> cacheException = new ConcurrentHashMap<>();
+    private static final ConcurrentHashMap<String, Function<String, AbstractException>> cacheFunction = new ConcurrentHashMap<>();
 
     /**
      * 方法句柄是一个有类型的，可以直接执行的指向底层方法、构造器、field等的引用
@@ -40,13 +42,13 @@ public final class MethodAccessor {
      */
     public static <T extends AbstractException> AbstractException getException(Class<T> cls, String message) {
         try {
-            AbstractException abstractException = cacheException.get(cls.toString());
-            if (abstractException != null) {
-                return abstractException;
+            Function<String, AbstractException> function = cacheFunction.get(cls.toString());
+            if (function != null) {
+                return applyMessage(function, message);
             }
-            abstractException = MethodAccessor.createAndApply(cls, message);
-            cacheException.putIfAbsent(cls.toString(), abstractException);
-            return abstractException;
+            function = MethodAccessor.createConstruct(cls);
+            cacheFunction.putIfAbsent(cls.toString(), function);
+            return applyMessage(function, message);
         } catch (Throwable throwable) {
             throw new RuntimeException("获取cache exception异常", throwable);
         }
@@ -73,25 +75,23 @@ public final class MethodAccessor {
                     methodHandle.type());
             return (Function<String, AbstractException>) site.getTarget().invokeExact();
         } catch (Throwable throwable) {
-            logger.warn("LambdaMetafactory创建构造函数异常:", throwable);
+            logger.warn("LambdaMetafactory create construct异常:", throwable);
             throw new RuntimeException(throwable);
         }
     }
 
     /**
-     * 根据异常Class类型，和异常消息，动态进行构造函数构建，并赋值
+     * 根据Function函数和异常message，调用对应构造函数方法
      *
-     * @param cls 异常Class
-     * @param message 异常消息
-     * @param <T> 异常Class类型
+     * @param function function函数
+     * @param message  异常消息
      * @return AbstractException
      */
-    public static <T> AbstractException createAndApply(Class<T> cls, String message) {
+    public static AbstractException applyMessage(Function<String, AbstractException> function, String message) {
         try {
-            Function<String, AbstractException> function = createConstruct(cls);
             return function.apply(message);
         } catch (Throwable throwable) {
-            logger.warn("LambdaMetafactory apply message异常:", throwable);
+            logger.warn("LambdaMetafactory function apply异常:", throwable);
             throw new RuntimeException(throwable);
         }
     }
