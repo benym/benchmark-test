@@ -9,9 +9,9 @@ import java.util.function.Function;
 
 /**
  * 对于非私有变量访问的场景，MethodHandle可以和LambdaMetafactory.metafactory任意lambda函数结合，做到更通用化，此处为和Function结合
- * 采用纳秒为单位，数值越小越快，从上至下，直接new set、lambda mh、无lambda的mh
+ * 采用纳秒为单位，数值越小越快，从上至下，直接new set、lambda mh、无lambda的mh、反射
  * Benchmark                                      Mode  Cnt     Score     Error  Units
- * MhExceptionBenchMark.MhExceptioTest.directNew  avgt   10  2821.192 ± 165.195  ns/op
+ * MhExceptionBenchMark.MhExceptioTest.directNew  avgt   10  2421.192 ± 165.195  ns/op
  * MhExceptionBenchMark.MhExceptioTest.mhLamda    avgt   10  2589.443 ± 204.428  ns/op
  * MhExceptionBenchMark.MhExceptioTest.mhNoLamda  avgt   10  2664.148 ± 217.869  ns/op
  * MhExceptionBenchMark.MhExceptioTest.reflet     avgt   10  2710.181 ± 304.747  ns/op
