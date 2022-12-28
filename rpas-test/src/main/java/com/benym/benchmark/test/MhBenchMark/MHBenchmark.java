@@ -51,29 +51,29 @@ public class MHBenchmark {
 
     @Benchmark
     public void testNoStaticReflection(GenerateModel generateModel) throws NoSuchFieldException, IllegalAccessException {
-        EntityWithNoSet pageResponse = new EntityWithNoSet();
-        Class<? extends EntityWithNoSet> EntityWithNoSetClass = pageResponse.getClass();
+        EntityWithNoSet entityWithNoSet = new EntityWithNoSet();
+        Class<? extends EntityWithNoSet> EntityWithNoSetClass = entityWithNoSet.getClass();
         Field testField = EntityWithNoSetClass.getDeclaredField("testField");
         testField.setAccessible(true);
-        testField.set(pageResponse, generateModel.source.getTestField());
+        testField.set(entityWithNoSet, generateModel.source.getTestField());
     }
 
     @Benchmark
     public void testStaticReflection(GenerateModel generateModel) throws NoSuchFieldException, IllegalAccessException {
-        EntityWithNoSet pageResponse = new EntityWithNoSet();
-        field.set(pageResponse, generateModel.source.getTestField());
+        EntityWithNoSet entityWithNoSet = new EntityWithNoSet();
+        field.set(entityWithNoSet, generateModel.source.getTestField());
     }
 
     @Benchmark
     public void testStaticMethodHandle(GenerateModel generateModel) throws Throwable {
-        EntityWithNoSet pageResponse = new EntityWithNoSet();
-        staticMethod.invoke(pageResponse, generateModel.source.getTestField());
+        EntityWithNoSet entityWithNoSet = new EntityWithNoSet();
+        staticMethod.invoke(entityWithNoSet, generateModel.source.getTestField());
     }
 
     @Benchmark
     public void testNoStaticMethodHandle(GenerateModel generateModel) throws Throwable {
-        EntityWithNoSet pageResponse = new EntityWithNoSet();
-        MethodAccessor.getCache(EntityWithNoSet.class + "testField").invoke(pageResponse, generateModel.source.getTestField());
+        EntityWithNoSet entityWithNoSet = new EntityWithNoSet();
+        MethodAccessor.getCache(EntityWithNoSet.class + "testField").invoke(entityWithNoSet, generateModel.source.getTestField());
     }
 
     public static void main(String[] args) throws RunnerException {
