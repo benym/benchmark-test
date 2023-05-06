@@ -1,4 +1,4 @@
-package com.benym.benchmark.test.interfaces;
+package com.benym.benchmark.test.BeanBenchMark.interfaces;
 
 import com.benym.benchmark.test.model.complex.DbDO;
 import com.benym.benchmark.test.model.complex.DbVO;

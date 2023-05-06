@@ -1,9 +1,9 @@
-package com.benym.benchmark.test;
+package com.benym.benchmark.test.BeanBenchMark;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.extra.cglib.BeanCopierCache;
 import com.alibaba.fastjson.JSON;
-import com.benym.benchmark.test.interfaces.MapStructMapperComplex;
+import com.benym.benchmark.test.BeanBenchMark.interfaces.MapStructMapperComplex;
 import com.benym.benchmark.test.model.complex.DbDO;
 import com.benym.benchmark.test.model.complex.DbVO;
 import com.benym.benchmark.test.service.ModelService;
@@ -425,7 +425,7 @@ public class BenchmarkTestComplex {
     public static void main(String[] args) throws RunnerException {
         Options options = new OptionsBuilder()
                 .include(BenchmarkTestComplex.class.getSimpleName())
-                .result("com/benym/benchmark/test/BeanBenchMark/result-complex.json")
+                .result("./result-complex.json")
                 .resultFormat(ResultFormatType.JSON)
                 .build();
         new Runner(options).run();
