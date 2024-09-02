@@ -1,7 +1,7 @@
 package com.benym.benchmark.test.BeanBenchMark.interfaces;
 
-import com.benym.benchmark.test.model.complex.DbDO;
-import com.benym.benchmark.test.model.complex.DbVO;
+import com.benym.benchmark.test.BeanBenchMark.model.complex.DbDO;
+import com.benym.benchmark.test.BeanBenchMark.model.complex.DbVO;
 import org.mapstruct.Mapper;
 
 /**

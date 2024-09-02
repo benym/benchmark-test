@@ -1,4 +1,4 @@
-package com.benym.benchmark.test.utils;
+package com.benym.benchmark.test.BeanBenchMark.utils;
 
 import net.sf.cglib.beans.BeanCopier;
 import net.sf.cglib.core.Converter;

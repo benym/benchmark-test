@@ -1,4 +1,4 @@
-package com.benym.benchmark.test.model.complex;
+package com.benym.benchmark.test.BeanBenchMark.model.complex;
 
 import java.io.Serializable;
 import java.util.List;

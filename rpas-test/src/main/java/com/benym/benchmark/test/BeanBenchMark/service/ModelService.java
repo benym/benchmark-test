@@ -1,10 +1,10 @@
-package com.benym.benchmark.test.service;
+package com.benym.benchmark.test.BeanBenchMark.service;
 
 
-import com.benym.benchmark.test.model.complex.DbDO;
-import com.benym.benchmark.test.model.complex.MockOne;
-import com.benym.benchmark.test.model.complex.MockTwo;
-import com.benym.benchmark.test.model.simple.DataBaseDO;
+import com.benym.benchmark.test.BeanBenchMark.model.complex.DbDO;
+import com.benym.benchmark.test.BeanBenchMark.model.complex.MockOne;
+import com.benym.benchmark.test.BeanBenchMark.model.complex.MockTwo;
+import com.benym.benchmark.test.BeanBenchMark.model.simple.DataBaseDO;
 
 import java.util.Collections;
 import java.util.Date;

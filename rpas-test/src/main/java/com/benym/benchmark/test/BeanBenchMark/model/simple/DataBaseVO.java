@@ -1,4 +1,4 @@
-package com.benym.benchmark.test.model.simple;
+package com.benym.benchmark.test.BeanBenchMark.model.simple;
 
 import java.io.Serializable;
 import java.util.Date;
