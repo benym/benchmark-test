@@ -6,7 +6,6 @@ import java.lang.invoke.MethodType;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * @author: yuanming3
  * @date: 2022/12/5 14:45
  */
 public class MethodAccessorNoLamda {

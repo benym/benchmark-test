@@ -5,7 +5,6 @@ import com.benym.benchmark.test.model.complex.DbVO;
 import org.mapstruct.Mapper;
 
 /**
- * @author: yuanming3
  * @date: 2022/11/14 18:51
  */
 @Mapper
